@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogCoreSolution.AccesoDatos.DATA
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
+        : IdentityDbContext(options)
     {
     }
 }
