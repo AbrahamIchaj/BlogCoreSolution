@@ -1,4 +1,6 @@
 using BlogCoreSolution.AccesoDatos.DATA;
+using BlogCoreSolution.AccesoDatos.DATA.Repository;
+using BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +16,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+// Agregar el contenedor de trabajo al contenedor IoC de inyección de dependencias
+builder.Services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
 
 var app = builder.Build();
 

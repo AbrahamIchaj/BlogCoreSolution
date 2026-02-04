@@ -1,10 +1,13 @@
-﻿using System;
+﻿using BlogCoreSolution.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository
 {
-    internal interface ICateogoriaRepository
+    public interface ICategoriaRepository
     {
+        void Update(Categoria categoria);
+
     }
 }
