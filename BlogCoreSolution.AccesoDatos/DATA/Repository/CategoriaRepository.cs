@@ -2,6 +2,7 @@
 using BlogCoreSolution.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BlogCoreSolution.AccesoDatos.DATA.Repository
@@ -19,7 +20,7 @@ namespace BlogCoreSolution.AccesoDatos.DATA.Repository
         {
             var objDesdeDb = _db.Categorias.FirstOrDefault(s => s.Id == categoria.Id);
             objDesdeDb.Nombre = categoria.Nombre;
-            objDesdeDb.Orden = categoria.Orden;
+            objDesdeDb.Orden= categoria.Orden;
 
             //_db.SaveChanges();
         }

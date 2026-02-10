@@ -100,5 +100,7 @@ namespace BlogCoreSolution.AccesoDatos.DATA.Repository
         {
             dbset.Remove(entity);
         }
+
+ 
     }
 }

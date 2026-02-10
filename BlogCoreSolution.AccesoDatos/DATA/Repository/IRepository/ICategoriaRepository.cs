@@ -5,9 +5,8 @@ using System.Text;
 
 namespace BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository
 {
-    public interface ICategoriaRepository
+    public interface ICategoriaRepository : IRepository<Categoria>
     {
         void Update(Categoria categoria);
-
     }
 }
