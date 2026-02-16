@@ -7,6 +7,6 @@ namespace BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository
 {
     public interface ICategoriaRepository : IRepository<Categoria>
     {
-        void Update(Categoria categoria);
+           void Update(Categoria categoria);
     }
 }

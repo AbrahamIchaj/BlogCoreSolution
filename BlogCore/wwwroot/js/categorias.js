@@ -16,7 +16,14 @@ function cargarDatatable() {
             { "data": "id", "width": "5%" },
             { "data": "nombre", "width": "40%" },
             { "data": "orden", "width": "10%" },
-            { "data": "fechaCreacion", "width": "20%" },
+            {
+                "data": "fechaCreacion",
+                "width": "20%",
+                "render": function (data) {
+                    if (!data) return "";
+                    return new Date(data).toLocaleDateString("es-CO");
+                }
+            },
             {
                 "data": "id",
                 "render": function (data) {

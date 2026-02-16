@@ -22,6 +22,11 @@ namespace BlogCoreSolution.Models
 
         public DateTime FechaCreacion { get; set; }
 
+        public Categoria()
+        {
+             FechaCreacion = DateTime.Now;
+        }
+
 
     }
 }

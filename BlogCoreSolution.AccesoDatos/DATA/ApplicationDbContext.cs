@@ -14,5 +14,7 @@ namespace BlogCoreSolution.AccesoDatos.DATA
         }
 
         public DbSet<Categoria> Categorias { get; set; }
+
+        public DbSet<Articulo> Articulos { get; set; }
     }
 }
