@@ -1,6 +1,6 @@
 ﻿using BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository;
-using Microsoft.AspNetCore.Mvc;
 using BlogCoreSolution.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BlogCore.Areas.Admin.Controllers
 {
@@ -86,7 +86,7 @@ namespace BlogCore.Areas.Admin.Controllers
             var objFromDb = _contenedorTrabajo.Categoria.Get(id);
             if (objFromDb == null)
             {
-                return Json(new {success = false, message = "Error borrando categoria" });
+                return Json(new { success = false, message = "Error borrando categoria" });
             }
             _contenedorTrabajo.Categoria.Remove(objFromDb);
             _contenedorTrabajo.Save();

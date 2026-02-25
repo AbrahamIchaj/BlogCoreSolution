@@ -1,9 +1,6 @@
 ﻿using BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace BlogCoreSolution.AccesoDatos.DATA.Repository
 {
@@ -45,8 +42,8 @@ namespace BlogCoreSolution.AccesoDatos.DATA.Repository
                 // Se divide la cadena de propiedares por comas y se itera sobre ellas
                 foreach (var includeProperty in includeProperties
                     .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                    {
-                    query = query.Include(includeProperty); 
+                {
+                    query = query.Include(includeProperty);
                 }
             }
 
@@ -67,7 +64,7 @@ namespace BlogCoreSolution.AccesoDatos.DATA.Repository
 
 
             //Se aplica el filtro si se proporciona
-            if(filter != null)
+            if (filter != null)
             {
                 query = query.Where(filter);
             }
@@ -101,6 +98,6 @@ namespace BlogCoreSolution.AccesoDatos.DATA.Repository
             dbset.Remove(entity);
         }
 
- 
+
     }
 }

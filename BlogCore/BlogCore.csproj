@@ -22,4 +22,8 @@
     <ProjectReference Include="..\BlogCoreSolution.AccesoDatos\BlogCoreSolution.AccesoDatos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\imagenes\articulos\" />
+  </ItemGroup>
+
 </Project>

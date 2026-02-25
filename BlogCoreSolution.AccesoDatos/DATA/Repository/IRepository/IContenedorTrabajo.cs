@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository
+﻿namespace BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository
 {
     public interface IContenedorTrabajo : IDisposable
     {
         ICategoriaRepository Categoria { get; }
+        IArticuloRepository Articulo { get; }
 
-        void Save(); 
+        void Save();
     }
 
-   
+
 }

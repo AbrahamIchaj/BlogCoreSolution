@@ -1,12 +1,11 @@
 ﻿using BlogCoreSolution.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository
 {
     public interface ICategoriaRepository : IRepository<Categoria>
     {
-           void Update(Categoria categoria);
+        IEnumerable<SelectListItem> GetListaCategoria();
+        void Update(Categoria categoria);
     }
 }

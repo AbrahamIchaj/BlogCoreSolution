@@ -1,6 +1,6 @@
-using System.Diagnostics;
 using BlogCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace BlogCore.Areas.Cliente.Controllers
 {

@@ -4,17 +4,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogCoreSolution.AccesoDatos.DATA
 {
-    public class ApplicationDbContext : IdentityDbContext 
+    public class ApplicationDbContext : IdentityDbContext
     {
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            
+
         }
 
         public DbSet<Categoria> Categorias { get; set; }
 
         public DbSet<Articulo> Articulos { get; set; }
+
     }
 }
