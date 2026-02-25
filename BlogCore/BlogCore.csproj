@@ -26,4 +26,9 @@
     <Folder Include="wwwroot\imagenes\articulos\" />
   </ItemGroup>
 
+	//Ignorar imagenes **temporalmente**
+	<ItemGroup>
+    <Content Include="wwwroot\imagenes\**\*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

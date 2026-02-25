@@ -1,6 +1,8 @@
 ﻿using BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository;
 using BlogCoreSolution.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BlogCore.Areas.Admin.Controllers
 {
@@ -56,7 +58,7 @@ namespace BlogCore.Areas.Admin.Controllers
                         archivos[0].CopyTo(fileStreams);
                     }
 
-                    artiVM.articulo.UrlImagen = $"imagenes/articulos/{nombreArchivo}{extension}";
+                    artiVM.articulo.UrlImagen = @"imagenes/articulos/{nombreArchivo}{extension}";
 
                     _contenedorTrabajo.Articulo.Add(artiVM.articulo);
                     _contenedorTrabajo.Save();
@@ -75,11 +77,40 @@ namespace BlogCore.Areas.Admin.Controllers
         }
 
 
+  
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            ArticuloVM artiVM = new ArticuloVM()
+            {
+                articulo = new BlogCoreSolution.Models.Articulo(),
+                ListaCategorias = _contenedorTrabajo.Categoria.GetListaCategoria()
+            }; 
+
+            if (id != null)
+            {
+                artiVM.articulo = _contenedorTrabajo.Articulo.Get(id.GetValueOrDefault());
+            }
+
+            return View(artiVM);
+        }
+
 
         #region Llamadas a la API
         public IActionResult GetAll()
         {
-            return Json(new { data = _contenedorTrabajo.Articulo.GetAll(includeProperties: "Categoria") });
+            var data = _contenedorTrabajo.Articulo
+                .GetAll(includeProperties: "Categoria")
+                .Select(a => new {
+                    a.Id,
+                    a.Nombre,
+                    categoria = a.Categoria,
+                    urlImagen = string.IsNullOrWhiteSpace(a.UrlImagen)
+                        ? null
+                        : a.UrlImagen.Replace("\\", "/").TrimStart('/')
+                });
+            return Json(new { data });
         }
 
         //[HttpDelete]
