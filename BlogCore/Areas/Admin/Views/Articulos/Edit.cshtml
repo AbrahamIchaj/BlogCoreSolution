@@ -7,9 +7,9 @@
 <br />
 
 <h2 class="text-center">Editar Articulo</h2>
-<form method="POST" asp-action="Create" enctype="multipart/form-data">
+<form method="POST" asp-action="Edit" enctype="multipart/form-data">
 
-    <input type="hidden" asp-action="Articulo.Id" />
+    <input type="hidden" asp-for="articulo.Id" />
 
     <div class="row px-2 offset-1 border">
         <div asp-validation-summary="All" class="text-danger"></div>

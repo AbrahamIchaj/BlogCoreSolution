@@ -58,7 +58,7 @@ namespace BlogCore.Areas.Admin.Controllers
                         archivos[0].CopyTo(fileStreams);
                     }
 
-                    artiVM.articulo.UrlImagen = @"imagenes/articulos/{nombreArchivo}{extension}";
+                    artiVM.articulo.UrlImagen = @"imagenes/articulos/" + nombreArchivo + extension;
 
                     _contenedorTrabajo.Articulo.Add(artiVM.articulo);
                     _contenedorTrabajo.Save();
@@ -112,6 +112,57 @@ namespace BlogCore.Areas.Admin.Controllers
                 });
             return Json(new { data });
         }
+
+
+        //EDITAR
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ArticuloVM artiVM)
+        {
+            if (ModelState.IsValid)
+            {
+                string rutaPrincipal = _hostingEnvironment.WebRootPath;
+                var archivos = HttpContext.Request.Form.Files;
+
+                var articuloDesdeBd = _contenedorTrabajo.Articulo.Get(artiVM.articulo.Id);
+
+                if (archivos.Count > 0)
+                {
+                    string nombreArchivo = Guid.NewGuid().ToString();
+                    var subidas = Path.Combine(rutaPrincipal, @"imagenes\articulos");
+                    var extension = Path.GetExtension(archivos[0].FileName);
+                    var nuevaExtension = Path.GetExtension(archivos[0].FileName);
+
+                    var rutaImagen = Path.Combine(rutaPrincipal, articuloDesdeBd.UrlImagen.TrimStart('\\'));
+
+                    if (System.IO.File.Exists(rutaImagen))
+                    {
+                        System.IO.File.Delete(rutaImagen);
+                    }
+
+                    //Subimos el nuevo archivo
+                    using (var fileStreams = new FileStream(Path.Combine(subidas, nombreArchivo + extension), FileMode.Create))
+                    {
+                        archivos[0].CopyTo(fileStreams);
+                    }
+
+                    artiVM.articulo.UrlImagen = @"/imagenes/articulos/" + nombreArchivo + extension;
+                }
+                else
+                {
+                    artiVM.articulo.UrlImagen = articuloDesdeBd.UrlImagen;
+                } 
+
+                _contenedorTrabajo.Articulo.Update(artiVM.articulo);
+                _contenedorTrabajo.Save();
+                return RedirectToAction(nameof(Index));
+
+            }
+
+            artiVM.ListaCategorias = _contenedorTrabajo.Categoria.GetListaCategoria();
+            return View(artiVM);
+        }
+
 
         //[HttpDelete]
         //public IActionResult Delete(int id)
