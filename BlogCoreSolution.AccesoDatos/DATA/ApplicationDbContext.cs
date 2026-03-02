@@ -17,5 +17,7 @@ namespace BlogCoreSolution.AccesoDatos.DATA
 
         public DbSet<Articulo> Articulos { get; set; }
 
+        public DbSet<Slider> Sliders { get; set; }
+
     }
 }

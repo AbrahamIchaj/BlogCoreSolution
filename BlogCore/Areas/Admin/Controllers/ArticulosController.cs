@@ -178,12 +178,12 @@ namespace BlogCore.Areas.Admin.Controllers
             if (System.IO.File.Exists(rutaImagen))
             {
                 System.IO.File.Delete(rutaImagen);
-            }
+            }           
             
             if (objFromDb == null)
             {
                 return Json(new { success = false, message = "Error borrando artículo" });
-            }
+            }           
             _contenedorTrabajo.Articulo.Remove(objFromDb);
             _contenedorTrabajo.Save();
             return Json(new { success = true, message = "Artículo borrada correctamente" });
