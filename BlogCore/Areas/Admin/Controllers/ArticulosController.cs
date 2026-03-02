@@ -50,7 +50,7 @@ namespace BlogCore.Areas.Admin.Controllers
                 if (artiVM.articulo.Id == 0 && archivos.Count > 0)
                 {
                     string nombreArchivo = Guid.NewGuid().ToString();
-                    var subidas = Path.Combine(rutaPrincipal, @"imagenes\articulos");
+                    var subidas = Path.Combine(rutaPrincipal, @"imagenes/articulos");
                     var extension = Path.GetExtension(archivos[0].FileName);
 
                     using (var fileStreams = new FileStream(Path.Combine(subidas, nombreArchivo + extension), FileMode.Create))
@@ -58,7 +58,7 @@ namespace BlogCore.Areas.Admin.Controllers
                         archivos[0].CopyTo(fileStreams);
                     }
 
-                    artiVM.articulo.UrlImagen = @"imagenes/articulos/" + nombreArchivo + extension;
+                    artiVM.articulo.UrlImagen = $"/imagenes/articulos/{nombreArchivo}{extension}";
 
                     _contenedorTrabajo.Articulo.Add(artiVM.articulo);
                     _contenedorTrabajo.Save();
@@ -111,11 +111,11 @@ namespace BlogCore.Areas.Admin.Controllers
                 if (archivos.Count > 0)
                 {
                     string nombreArchivo = Guid.NewGuid().ToString();
-                    var subidas = Path.Combine(rutaPrincipal, @"imagenes\articulos");
+                    var subidas = Path.Combine(rutaPrincipal, @"imagenes/articulos");
                     var extension = Path.GetExtension(archivos[0].FileName);
                     var nuevaExtension = Path.GetExtension(archivos[0].FileName);
 
-                    var rutaImagen = Path.Combine(rutaPrincipal, articuloDesdeBd.UrlImagen.TrimStart('\\'));
+                    var rutaImagen = Path.Combine(rutaPrincipal, articuloDesdeBd.UrlImagen.TrimStart('\\', '/'));
 
                     if (System.IO.File.Exists(rutaImagen))
                     {
@@ -128,7 +128,7 @@ namespace BlogCore.Areas.Admin.Controllers
                         archivos[0].CopyTo(fileStreams);
                     }
 
-                    artiVM.articulo.UrlImagen = @"/imagenes/articulos/" + nombreArchivo + extension;
+                    artiVM.articulo.UrlImagen = $"/imagenes/articulos/{nombreArchivo}{extension}";
                 }
                 else
                 {
@@ -173,7 +173,7 @@ namespace BlogCore.Areas.Admin.Controllers
         {
             var objFromDb = _contenedorTrabajo.Articulo.Get(id);
             string rutaDirectorioPrincipal = _hostingEnvironment.WebRootPath;
-            var rutaImagen = Path.Combine(rutaDirectorioPrincipal, objFromDb.UrlImagen.TrimStart('\\'));
+            var rutaImagen = Path.Combine(rutaDirectorioPrincipal, objFromDb.UrlImagen.TrimStart('\\', '/'));
             
             if (System.IO.File.Exists(rutaImagen))
             {
