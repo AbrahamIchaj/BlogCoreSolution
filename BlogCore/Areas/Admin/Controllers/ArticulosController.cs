@@ -96,24 +96,6 @@ namespace BlogCore.Areas.Admin.Controllers
             return View(artiVM);
         }
 
-
-        #region Llamadas a la API
-        public IActionResult GetAll()
-        {
-            var data = _contenedorTrabajo.Articulo
-                .GetAll(includeProperties: "Categoria")
-                .Select(a => new {
-                    a.Id,
-                    a.Nombre,
-                    categoria = a.Categoria,
-                    urlImagen = string.IsNullOrWhiteSpace(a.UrlImagen)
-                        ? null
-                        : a.UrlImagen.Replace("\\", "/").TrimStart('/')
-                });
-            return Json(new { data });
-        }
-
-
         //EDITAR
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -151,7 +133,7 @@ namespace BlogCore.Areas.Admin.Controllers
                 else
                 {
                     artiVM.articulo.UrlImagen = articuloDesdeBd.UrlImagen;
-                } 
+                }
 
                 _contenedorTrabajo.Articulo.Update(artiVM.articulo);
                 _contenedorTrabajo.Save();
@@ -164,18 +146,48 @@ namespace BlogCore.Areas.Admin.Controllers
         }
 
 
-        //[HttpDelete]
-        //public IActionResult Delete(int id)
-        //{
-        //    var objFromDb = _contenedorTrabajo.Categoria.Get(id);
-        //    if (objFromDb == null)
-        //    {
-        //        return Json(new { success = false, message = "Error borrando categoria" });
-        //    }
-        //    _contenedorTrabajo.Categoria.Remove(objFromDb);
-        //    _contenedorTrabajo.Save();
-        //    return Json(new { success = true, message = "Categoria borrada correctamente" });
-        //}
+
+        //AREA
+        #region Llamadas a la API
+        public IActionResult GetAll()
+        {
+            var data = _contenedorTrabajo.Articulo
+                .GetAll(includeProperties: "Categoria")
+                .Select(a => new {
+                    a.Id,
+                    a.Nombre,
+                    categoria = a.Categoria,
+                    urlImagen = string.IsNullOrWhiteSpace(a.UrlImagen)
+                        ? null
+                        : a.UrlImagen.Replace("\\", "/").TrimStart('/')
+                });
+            return Json(new { data });
+        }
+
+
+
+
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var objFromDb = _contenedorTrabajo.Articulo.Get(id);
+            string rutaDirectorioPrincipal = _hostingEnvironment.WebRootPath;
+            var rutaImagen = Path.Combine(rutaDirectorioPrincipal, objFromDb.UrlImagen.TrimStart('\\'));
+            
+            if (System.IO.File.Exists(rutaImagen))
+            {
+                System.IO.File.Delete(rutaImagen);
+            }
+            
+            if (objFromDb == null)
+            {
+                return Json(new { success = false, message = "Error borrando artículo" });
+            }
+            _contenedorTrabajo.Articulo.Remove(objFromDb);
+            _contenedorTrabajo.Save();
+            return Json(new { success = true, message = "Artículo borrada correctamente" });
+        }
 
         #endregion
     }
