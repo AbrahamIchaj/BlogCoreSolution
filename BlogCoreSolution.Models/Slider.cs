@@ -18,6 +18,7 @@ namespace BlogCoreSolution.Models
 
         [Required(ErrorMessage = "El estado del Slider es obligatorio")]
         [Display(Name = "Estado de Slider")]
+        //[MaxLength(1)]
         public bool Estado { get; set; }
 
         [DataType(DataType.ImageUrl)]

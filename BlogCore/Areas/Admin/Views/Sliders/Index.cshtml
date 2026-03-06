@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Sliders";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-8">
+            <h2 class="text-primary">Lista de Slider</h2>
+        </div>
+
+        <div class="col-4 text-right">
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Crear Nuevo Slider
+            </a>
+        </div>
+    </div>
+
+
+    <br />
+    <br />
+
+    <table id="tblSliders" class="table table-stripped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>UrlImagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section scripts {
+    <script src="~/js/sliders.js"></script>
+}
+
+

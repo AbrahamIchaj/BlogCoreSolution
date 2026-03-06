@@ -1,55 +1,52 @@
-﻿@model BlogCoreSolution.Models.ViewModels.ArticuloVM;
+﻿@model BlogCoreSolution.Models.ViewModels.SliderVM;
 @{
-    ViewData["Title"] = "Editar Articulo";
+    ViewData["Title"] = "Editar Slider";
 }
 
 <br />
 <br />
 
-<h2 class="text-center">Editar Articulo</h2>
+<h2 class="text-center">Editar Slider</h2>
 <form method="POST" asp-action="Edit" enctype="multipart/form-data">
 
-    <input type="hidden" asp-for="articulo.Id" />
+    <input type="hidden" asp-for="slider.Id" />
 
     <div class="row px-2 offset-1 border">
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <div class="col-7 offset-1 mt-4">
-            <div class="form-group row mt-2">
+            <div class="form-group row mt-4">
                 <div class="col-4">
-                    <label asp-for="articulo.Nombre"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="articulo.Nombre" class="form-control" placeholder="Ingresa el nombre del Articulo" />
-                    <span asp-validation-for="articulo.Nombre" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row mt-2">
-                <div class="col-4">
-                    <label asp-for="articulo.Descripcion"></label>
-                </div>
-                <div class="col-8">
-                    <textarea asp-for="articulo.Descripcion" id="Contenido" class="form-control" style="height: 300px;"></textarea>
-                    <span asp-validation-for="articulo.Descripcion" class="text-danger"></span>
+                    <label asp-for="slider.Nombre"></label>
                 </div>
 
-                <div class="form-group row mt-2">
-                    <div class="col-4">
-                        <label asp-for="articulo.Categoria"></label>
-                    </div>
-                    <div class="col-8">
-                        @Html.DropDownListFor(m => m.articulo.CategoriaId, Model.ListaCategorias,
-                        "-Por favor selecciona una categoría-", new { @class = "form-control" })
-                        <span asp-validation-for="articulo.Descripcion" class="text-danger"></span>
-                    </div>
+                <div class="col-8">
+                    <input asp-for="slider.Nombre" class="form-control" placeholder="Ingresa el nombre del Slider" />
+                    <span asp-validation-for="slider.Nombre" class="text-danger"></span>
+                </div>
+           </<div>
+
+
+                <div class="col-4  mt-2">
+                    <label asp-for="slider.Estado"></label>
+                </div>
+
+                <div class="col-8">
+                    <select asp-for="slider.Estado" class="form-control">
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+
+                    </select>
+                    <span asp-validation-for="slider.Estado" class="text-danger"></span>
+                </div>
 
                     <div class="form-group row mt-2">
-                        <label asp-for="articulo.UrlImagen"></label>
+                        <label asp-for="slider.UrlImagen"></label>
                     </div>
+
                     <div class="col-8">
                         <input type="file" class="form-control" name="archivos" id="subidaArchivo" />
-                        <span asp-validation-for="articulo.UrlImagen" class="text-danger"></span>
+                        <span asp-validation-for="slider.UrlImagen" class="text-danger"></span>
                     </div>
 
                     <div class="form-group-row mt-4">
@@ -67,14 +64,15 @@
                     </div>
                 </div>
             </div>
-         </div>
-
-        <div class="col-4 pt-3">
-            <img src="@Model.articulo.UrlImagen" width="300"
-                 style="border-radius: 5px; border: 1px solid #bbb9b9" />
+            <div class="col-4 pt-3">
+                <img src="@Model.slider.UrlImagen" width="300"
+                     style="border-radius: 5px; border: 1px solid #bbb9b9" />
+            </div>
         </div>
+
+       
     </div>
-        
+
 </form>
 
 @section Scripts {
