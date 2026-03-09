@@ -174,7 +174,7 @@ namespace BlogCore.Areas.Admin.Controllers
     .Select(s => new {
         s.Id,
         s.Nombre,
-        Estado = s.Estado,
+        Estado = s.Estado ? "Activo" : "Inactivo",
         urlImagen = string.IsNullOrWhiteSpace(s.UrlImagen)
             ? null
             : s.UrlImagen.Replace("\\", "/").TrimStart('/')

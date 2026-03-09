@@ -1,4 +1,7 @@
 using BlogCore.Models;
+using BlogCoreSolution.AccesoDatos.DATA.Repository;
+using BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository;
+using BlogCoreSolution.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,9 +11,32 @@ namespace BlogCore.Areas.Cliente.Controllers
     [Area("Cliente")]
     public class HomeController : Controller
     {
+        private readonly IContenedorTrabajo _contenedorTrabajo;
+
+        public HomeController(IContenedorTrabajo contenedorTrabajo)
+        {
+            _contenedorTrabajo = contenedorTrabajo;
+
+
+        }
+
         public IActionResult Index()
         {
-            return View();
+            HomeVM homeVM = new HomeVM()
+            {
+                Siders = _contenedorTrabajo.Slider.GetAll(),
+                ListArticulos = _contenedorTrabajo.Articulo.GetAll()
+            };
+
+            return View(homeVM);
+        }
+
+        [HttpGet]
+        public IActionResult Detalle(int id)
+        {
+            var articuloDesdeBd = _contenedorTrabajo.Articulo.Get(id);
+            return View(articuloDesdeBd);
+
         }
 
 
