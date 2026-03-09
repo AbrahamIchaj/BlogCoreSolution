@@ -24,10 +24,11 @@ namespace BlogCore.Areas.Cliente.Controllers
         {
             HomeVM homeVM = new HomeVM()
             {
-                Siders = _contenedorTrabajo.Slider.GetAll(),
+                Sliders = _contenedorTrabajo.Slider.GetAll(),
                 ListArticulos = _contenedorTrabajo.Articulo.GetAll()
             };
 
+            ViewBag.IsHome = true;
             return View(homeVM);
         }
 

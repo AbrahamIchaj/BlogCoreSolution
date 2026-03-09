@@ -6,7 +6,7 @@ namespace BlogCoreSolution.Models.ViewModels
 {
     public class HomeVM
     {
-        public IEnumerable<Slider> Siders { get; set; }
+        public IEnumerable<Slider> Sliders { get; set; }
         public IEnumerable<Articulo> ListArticulos { get; set; }
 
 
