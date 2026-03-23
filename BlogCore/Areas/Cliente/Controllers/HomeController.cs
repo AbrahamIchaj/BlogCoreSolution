@@ -28,6 +28,7 @@ namespace BlogCore.Areas.Cliente.Controllers
                 ListArticulos = _contenedorTrabajo.Articulo.GetAll()
             };
 
+            //Esta linea es para saber si estamos en el home
             ViewBag.IsHome = true;
             return View(homeVM);
         }

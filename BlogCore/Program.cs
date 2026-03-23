@@ -1,8 +1,10 @@
 using BlogCoreSolution.AccesoDatos.DATA;
 using BlogCoreSolution.AccesoDatos.DATA.Repository;
 using BlogCoreSolution.AccesoDatos.DATA.Repository.IRepository;
+using BlogCoreSolution.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,11 +15,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-// Agregar el contenedor de trabajo al contenedor IoC de inyección de dependencias
+// Agregar el contenedor de trabajo al contenedor IoC de inyecciï¿½n de dependencias
 builder.Services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
 
 var app = builder.Build();
